@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const productInfo = require("../db/model/productInfo");
+const tradeList = require("../db/model/tradeList");
 
 const { MONGO_URI: mongoURI } = process.env;
 
@@ -10,6 +11,7 @@ module.exports = (function() {
   return {
     Models: {
       productInfo,
+      tradeList
     },
     connect() {
       return mongoose
