@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", async function(req, res) {
     try {
-        console.log("gg");
+        console.log("productInfo");
         const productInfos = await db.Models.productInfo.find();
         console.log(productInfos);
 
