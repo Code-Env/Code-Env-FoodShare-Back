@@ -1,23 +1,12 @@
 const express = require("express");
-
-const db = require("../db");
-
+const db_connect = require("../db/db_connect");
 const router = express.Router();
 
-router.get("/", async function(req, res) {
-    try {
-        console.log("tradeList");
-        const tradeList = await db.Models.tradeList.find();
-        console.log(tradeList);
-
-        return res.send(tradeList);
-    }catch (error){
-        next(error);
-    }
+router.get("/", async function (req, res) {
+  db_connect.query("SELECT * from FoodShare.tradelists", (error, rows) => {
+    if (error) throw error;
+    console.log("db: ", rows);
+    res.send(rows);
+  });
 });
-
-router.post("/tradeList", function(req, res) {
-    res.send("tradeList");
-});
-
 module.exports = router;
