@@ -1,23 +1,12 @@
 const express = require("express");
-
-const db = require("../db");
-
+const db_connect = require("../db/db_connect");
 const router = express.Router();
 
-router.get("/", async function(req, res) {
-    try {
-        console.log("productInfo");
-        const productInfos = await db.Models.productInfo.find();
-        console.log(productInfos);
-
-        return res.send(productInfos);
-    }catch (error) {
-        next(error);
-    }
+router.get("/", async function (req, res) {
+  db_connect.query("SELECT * from FoodShare.productinfos", (error, rows) => {
+    if (error) throw error;
+    console.log("db: ", rows);
+    res.send(rows);
+  });
 });
-
-router.post("/productInfo", function(req, res) {
-    res.send("productInfo");
-});
-
 module.exports = router;
